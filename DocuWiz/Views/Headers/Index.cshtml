@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DocuWiz.Models.Header>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Headers</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Header</th>
+        <th>Sections</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var header in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(header.Name, "Details", "Headers", new {id = header.Id},null)</td>
+                <td>@Html.ActionLink(header.Name, "HeaderToSectionIndex", "Headers", new { id = header.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+

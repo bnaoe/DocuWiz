@@ -20,6 +20,10 @@ namespace DocuWiz.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Header> Headers { get; set; }
+        public DbSet<Section> Sections { get; set; }
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
