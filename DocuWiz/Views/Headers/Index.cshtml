@@ -5,7 +5,9 @@
 }
 
 <h2>Headers</h2>
-
+<p>
+    @Html.ActionLink("New Header", "New", "Headers", null, new { @class = "btn btn-primary" })
+</p>
 <table class="table table-bordered table-hover">
     <thead>
     <tr>
@@ -17,8 +19,8 @@
         @foreach (var header in Model)
         {
             <tr>
-                <td>@Html.ActionLink(header.Name, "Details", "Headers", new {id = header.Id},null)</td>
-                <td>@Html.ActionLink(header.Name, "HeaderToSectionIndex", "Headers", new { id = header.Id }, null)</td>
+                <td>@Html.ActionLink(header.Name, "Edit", "Headers", new {id = header.Id},null)</td>
+                <td>@Html.ActionLink("Sections", "HeaderToSectionIndex", "Headers", new { id = header.Id }, null)</td>
             </tr>
         }
     </tbody>

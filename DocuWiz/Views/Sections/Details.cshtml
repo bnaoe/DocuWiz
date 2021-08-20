@@ -5,3 +5,10 @@
 }
 
 <h2>@Model.Name</h2>
+<ul>
+    <div class="form-group">
+        @Html.LabelFor(s => s.Memo)
+        @Html.TextAreaFor(s => s.Memo, 40, 40, htmlAttributes: new { style = "width: 100%; max-width: 100%;", @class = "form-control", @readonly = "readonly" })
+
+    </div>
+</ul>

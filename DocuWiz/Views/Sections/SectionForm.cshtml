@@ -1,0 +1,35 @@
+﻿@model DocuWiz.ViewModels.SectionFormViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Section</h2>
+@using (Html.BeginForm("Save", "Sections"))
+{
+    <div class="form-group">
+        @Html.LabelFor(s => s.Section.HeaderId)
+        @Html.DropDownListFor(s => s.Section.HeaderId, new SelectList(Model.Header, "Id", "Name"), "Select Header", new { @class = "form-control" })
+        @Html.ValidationMessageFor(s => s.Section.HeaderId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(s => s.Section.Name)
+        @Html.TextBoxFor(s => s.Section.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(s=>s.Section.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.Section.Memo)
+        @Html.TextAreaFor(s => s.Section.Memo, 30, 40, htmlAttributes: new { style = "width:100%; max-width: 100%;", @class = "form-control" })
+        @Html.ValidationMessageFor(s=>s.Section.Memo)
+    </div>
+    @Html.HiddenFor(s => s.Section.Id)
+    @Html.AntiForgeryToken()
+
+    <button type="Submit" class="btn btn-primary">Save</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

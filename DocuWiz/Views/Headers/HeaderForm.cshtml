@@ -1,0 +1,32 @@
+﻿@model DocuWiz.ViewModels.HeaderFormViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Header</h2>
+@using (Html.BeginForm("Save", "Headers"))
+{
+    <div class="form-group">
+        @Html.LabelFor(h => h.Header.Name)
+        @Html.TextBoxFor(h => h.Header.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(h=>h.Header.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(h => h.Header.Description)
+        @Html.TextAreaFor(h => h.Header.Description, 10, 40, htmlAttributes: new { style = "width: 100%; max-width: 100%;", @class = "form-control" })
+
+    </div>
+    @Html.HiddenFor(h => h.Header.Id)
+    @Html.AntiForgeryToken()
+    <button type="Submit" class="btn btn-primary">Save</button>
+
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
