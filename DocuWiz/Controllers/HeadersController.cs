@@ -52,7 +52,10 @@ namespace DocuWiz.Controllers
         public ActionResult New()
         {
 
-            var viewModel = new HeaderFormViewModel();
+            var viewModel = new HeaderFormViewModel
+            {
+                Header = new Header()
+            };
 
             return View("HeaderForm",viewModel);
         }

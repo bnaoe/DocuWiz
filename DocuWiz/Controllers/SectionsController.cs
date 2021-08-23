@@ -29,9 +29,11 @@ namespace DocuWiz.Controllers
         public ViewResult Index()
         {
 
-            var sections = _context.Sections.Include(s => s.Header).ToList();
+            //var sections = _context.Sections.Include(s => s.Header).ToList();
 
-            return View(sections);
+            //return View(sections);
+
+            return View();
         }
 
         public ActionResult Details(int id)

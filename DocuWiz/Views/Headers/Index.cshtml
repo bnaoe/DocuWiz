@@ -8,23 +8,69 @@
 <p>
     @Html.ActionLink("New Header", "New", "Headers", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table table-bordered table-hover">
+<table id="headers" class="table table-bordered table-hover">
     <thead>
     <tr>
         <th>Header</th>
         <th>Sections</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
-        @foreach (var header in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(header.Name, "Edit", "Headers", new {id = header.Id},null)</td>
-                <td>@Html.ActionLink("Sections", "HeaderToSectionIndex", "Headers", new { id = header.Id }, null)</td>
-            </tr>
-        }
     </tbody>
 
 </table>
+@section scripts
+{<script>
+     $(document).ready(function() {
+         var table = $("#headers").dataTable({
+             ajax: {
+                 url: "/api/headers",
+                 dataSrc:""
+             },
+             columns: [
+                 {
+                     data: "name",
+                     render: function(data, type, header) {
+                         return "<a href='/headers/edit/" + header.id + "'>" + header.name + "</a>";
+                     }
+                 },
+                 {
+                     data: null,
+                     render: function(header) {
+                         return "<a href='/headers/headerToSectionIndex/" + header.id + "'>Sections</a>";
+                     }
+                 },
+                 {
+                     data: "id",
+                     render: function(data) {
+                         return "<button class='btn-link js-delete' data-header-id=" + data + ">Delete</button>";
+                     }
+                 }
+             ]
+         });
+
+
+         $("#headers").on("click",
+             ".js-delete",
+             function() {
+                 var button = $(this);
+
+                 bootbox.confirm("Are you sure you want to delete this header",
+                     function(result) {
+                         if (result) {
+                             $.ajax({
+                                 url: "/api/headers/" + button.attr("data-header-id"),
+                                 method: "DELETE",
+                                 success: function () {
+                                     table.row(button.parents("tr")).remove().draw();
+                                 }
+                             });
+                         }
+                     });
+             });
+     });
+ </script>
+}
 
 

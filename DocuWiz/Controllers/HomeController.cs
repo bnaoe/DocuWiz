@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace DocuWiz.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -15,14 +16,14 @@ namespace DocuWiz.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Application description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact page.";
 
             return View();
         }
