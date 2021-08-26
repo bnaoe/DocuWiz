@@ -8,6 +8,7 @@ using System.Web.Http;
 using AutoMapper;
 using DocuWiz.Dtos;
 using DocuWiz.Models;
+using Microsoft.AspNet.Identity;
 
 namespace DocuWiz.Controllers.API
 {
@@ -22,9 +23,9 @@ namespace DocuWiz.Controllers.API
 
         public IHttpActionResult GetHeaders()
         {
-            //return _context.Headers.ToList().Select(Mapper.Map<Header, HeaderDto>);
-
+            var userId = User.Identity.GetUserId();
             var headerDtos = _context.Headers
+                .Where(h => h.UserId == userId)
                 .ToList()
                 .Select(Mapper.Map<Header, HeaderDto>);
 

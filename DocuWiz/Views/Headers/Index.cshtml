@@ -63,7 +63,8 @@
                                  url: "/api/headers/" + button.attr("data-header-id"),
                                  method: "DELETE",
                                  success: function () {
-                                     table.row(button.parents("tr")).remove().draw();
+                                     //table.row(button.parents("tr")).remove().draw();
+                                     button.parents("tr").remove();
                                  }
                              });
                          }

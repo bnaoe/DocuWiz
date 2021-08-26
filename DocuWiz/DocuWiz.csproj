@@ -214,6 +214,14 @@
     <Compile Include="Migrations\202108200140450_UpdatedDomains.Designer.cs">
       <DependentUpon>202108200140450_UpdatedDomains.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108251409004_AddUserIdToHeaders.cs" />
+    <Compile Include="Migrations\202108251409004_AddUserIdToHeaders.Designer.cs">
+      <DependentUpon>202108251409004_AddUserIdToHeaders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108251422204_FixError.cs" />
+    <Compile Include="Migrations\202108251422204_FixError.Designer.cs">
+      <DependentUpon>202108251422204_FixError.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Header.cs" />
@@ -498,6 +506,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108200140450_UpdatedDomains.resx">
       <DependentUpon>202108200140450_UpdatedDomains.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108251409004_AddUserIdToHeaders.resx">
+      <DependentUpon>202108251409004_AddUserIdToHeaders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108251422204_FixError.resx">
+      <DependentUpon>202108251422204_FixError.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

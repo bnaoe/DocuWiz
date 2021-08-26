@@ -21,8 +21,8 @@
 </table>
 @section scripts
 {<script>
-     $(document).ready(function() {
-         var table = $("#sections").dataTable({
+    $(document).ready(function () {
+        var table = $("#sections").dataTable({
              ajax: {
                  url: "/api/sections",
                  dataSrc:""
@@ -56,10 +56,11 @@
                      function(result) {
                          if (result) {
                              $.ajax({
-                                 url: "/api/sections/" + button.attr("data-customer-id"),
+                                 url: "/api/sections/" + button.attr("data-section-id"),
                                  method: "DELETE",
                                  success: function () {
-                                     table.row(button.parents("tr")).remove().draw();
+                                     //table.row(button.parents("tr")).remove().draw();
+                                     button.parents("tr").remove();
                                  }
                              });
                          }

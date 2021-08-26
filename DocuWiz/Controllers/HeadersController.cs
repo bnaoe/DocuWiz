@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DocuWiz.ViewModels;
-
+using Microsoft.AspNet.Identity;
 
 namespace DocuWiz.Controllers
 {
@@ -27,7 +27,8 @@ namespace DocuWiz.Controllers
         public ViewResult Index()
         {
 
-            var headers = _context.Headers.ToList();
+            var userId = User.Identity.GetUserId(); 
+            var headers = _context.Headers.Where(h => h.UserId == userId).ToList();
 
 
             return View(headers);
@@ -64,6 +65,7 @@ namespace DocuWiz.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Header header)
         {
+            var userId = User.Identity.GetUserId();
 
             if (!ModelState.IsValid)
             {
@@ -76,6 +78,7 @@ namespace DocuWiz.Controllers
 
             if(header.Id ==0)
             {
+                header.UserId = userId;
                 _context.Headers.Add(header);
             }
             else
@@ -84,6 +87,7 @@ namespace DocuWiz.Controllers
 
                 headerInDb.Name = header.Name;
                 headerInDb.Description = header.Description;
+                headerInDb.UserId = userId;
             }
             _context.SaveChanges();
 

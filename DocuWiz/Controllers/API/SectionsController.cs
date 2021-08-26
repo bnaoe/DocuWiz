@@ -8,6 +8,7 @@ using AutoMapper;
 using DocuWiz.Dtos;
 using DocuWiz.Models;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 
 
 namespace DocuWiz.Controllers.API
@@ -24,9 +25,10 @@ namespace DocuWiz.Controllers.API
         public IHttpActionResult GetSections()
         {
             //return _context.Sections.ToList().Select(Mapper.Map<Section, SectionDto>);
-
+            var userId = User.Identity.GetUserId();
             var sectionDtos = _context.Sections
                 .Include(s=>s.Header)
+                .Where(s=>s.Header.UserId == userId)
                 .ToList()
                 .Select(Mapper.Map<Section, SectionDto>);
 
@@ -80,12 +82,12 @@ namespace DocuWiz.Controllers.API
 
         public void DeleteSection(int id)
         {
-            var sectionInDb = _context.Headers.SingleOrDefault(s => s.Id == id);
+            var sectionInDb = _context.Sections.SingleOrDefault(s => s.Id == id);
 
             if (sectionInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            _context.Headers.Remove(sectionInDb);
+            _context.Sections.Remove(sectionInDb);
             _context.SaveChanges();
         }
 

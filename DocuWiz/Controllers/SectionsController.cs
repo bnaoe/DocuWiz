@@ -7,6 +7,7 @@ using DocuWiz.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure.MappingViews;
 using DocuWiz.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace DocuWiz.Controllers
 {
@@ -47,8 +48,8 @@ namespace DocuWiz.Controllers
 
         public ActionResult New()
         {
-
-            var headers = _context.Headers.ToList();
+            var userId = User.Identity.GetUserId();
+            var headers = _context.Headers.Where(h => h.UserId == userId).ToList();
             var viewModel = new SectionFormViewModel
             {
                 Header = headers,
@@ -94,6 +95,7 @@ namespace DocuWiz.Controllers
         }
         public ActionResult Edit(int id)
         {
+            var userId = User.Identity.GetUserId();
             var section = _context.Sections.Single(s => s.Id == id);
 
             if (section == null)
@@ -103,7 +105,7 @@ namespace DocuWiz.Controllers
             var viewModel = new SectionFormViewModel
             {
                 Section = section,
-                Header = _context.Headers.ToList()
+                Header = _context.Headers.Where(h=>h.UserId==userId).ToList()
             };
 
             return View("SectionForm",viewModel);
